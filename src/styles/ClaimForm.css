@@ -3,6 +3,10 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f0f4f8;
 }
+label {
+  color: #34495e;
+  text-align: left;
+}
 
 .form-wrapper {
   min-height: 100vh;
@@ -75,6 +79,7 @@ body {
   font-weight: 800;
   color: #133e68;
   margin: 24px 0 12px;
+  font-style: italic;
 }
 
 .submit-btn {

@@ -48,7 +48,7 @@ const ClaimForm = () => {
       case "health":
         return (
           <>
-            <SectionTitle title="Health Insurance Details" />
+            <label>Health Insurance Details</label>
             <Input
               placeholder="Hospital Name"
               value={dynamicFields.hospitalName || ""}
