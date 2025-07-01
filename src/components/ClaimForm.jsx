@@ -1,195 +1,63 @@
 import React, { useState } from "react";
-import "../styles/ClaimForm.css";
-import logo from "../assets/xangam.png";
+import logo from "../assets/xangam.png"; // Adjust path as needed
 
 const ClaimForm = () => {
   const [claimType, setClaimType] = useState("");
   const [aadhaar, setAadhaar] = useState("");
   const [consent, setConsent] = useState(false);
   const [response, setResponse] = useState("");
-  const [dynamicFields, setDynamicFields] = useState({});
 
-  const clearDynamicFields = (type) => {
-    const fieldsByType = {
-      health: { hospitalName: "", admissionDate: "", dischargeDate: "" },
-      motor: { vehicleNumber: "", accidentDate: "" },
-      life: { nomineeName: "", deathDate: "", causeOfDeath: "" },
-      travel: { destination: "", travelStart: "", incident: "" },
-      home: { address: "", damage: "" },
-      personal: { injuryType: "", incidentDate: "" },
-    };
-    return fieldsByType[type] || {};
-  };
-
-  const handleClaimTypeChange = (e) => {
-    const newType = e.target.value;
-    setClaimType(newType);
-    setDynamicFields(clearDynamicFields(newType));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (aadhaar.length !== 12 || !consent) {
-      setResponse("Please enter a valid Aadhaar and provide consent.");
-      return;
-    }
-
-    const isSuccess = Math.random() > 0.3;
-    if (isSuccess) {
-      window.location.href = "https://xangarsinfra.com/verify-success";
-    } else {
-      setResponse("❌ Authentication failed. Please try alternate verification.");
-    }
-  };
-
-  const renderClaimFields = () => {
+  const renderDynamicFields = () => {
     switch (claimType) {
       case "health":
         return (
           <>
-            <label>Health Insurance Details</label>
-            <Input
-              placeholder="Hospital Name"
-              value={dynamicFields.hospitalName || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, hospitalName: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Admission Date"
-              value={dynamicFields.admissionDate || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, admissionDate: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Discharge Date"
-              value={dynamicFields.dischargeDate || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, dischargeDate: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Health Insurance Details</h2>
+            <input type="text" placeholder="Hospital Name" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Admission Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Discharge Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       case "motor":
         return (
           <>
-            <SectionTitle title="Motor Insurance Details" />
-            <Input
-              placeholder="Vehicle Number"
-              value={dynamicFields.vehicleNumber || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, vehicleNumber: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Accident Date"
-              value={dynamicFields.accidentDate || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, accidentDate: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Motor Insurance Details</h2>
+            <input type="text" placeholder="Vehicle Number" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Accident Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       case "life":
         return (
           <>
-            <SectionTitle title="Life Insurance Details" />
-            <Input
-              placeholder="Nominee Name"
-              value={dynamicFields.nomineeName || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, nomineeName: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Date of Death"
-              value={dynamicFields.deathDate || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, deathDate: e.target.value })
-              }
-            />
-            <Input
-              placeholder="Cause of Death"
-              value={dynamicFields.causeOfDeath || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, causeOfDeath: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Life Insurance Details</h2>
+            <input type="text" placeholder="Nominee Name" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Date of Death" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="text" placeholder="Cause of Death" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       case "travel":
         return (
           <>
-            <SectionTitle title="Travel Insurance Details" />
-            <Input
-              placeholder="Destination Country"
-              value={dynamicFields.destination || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, destination: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Travel Start Date"
-              value={dynamicFields.travelStart || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, travelStart: e.target.value })
-              }
-            />
-            <Input
-              placeholder="Incident Description"
-              value={dynamicFields.incident || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, incident: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Travel Insurance Details</h2>
+            <input type="text" placeholder="Destination Country" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Travel Start Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="text" placeholder="Incident Description" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       case "home":
         return (
           <>
-            <SectionTitle title="Home Insurance Details" />
-            <Input
-              placeholder="Property Address"
-              value={dynamicFields.address || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, address: e.target.value })
-              }
-            />
-            <Input
-              placeholder="Type of Damage"
-              value={dynamicFields.damage || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, damage: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Home Insurance Details</h2>
+            <input type="text" placeholder="Property Address" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="text" placeholder="Type of Damage" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       case "personal":
         return (
           <>
-            <SectionTitle title="Personal Accident Details" />
-            <Input
-              placeholder="Injury Type"
-              value={dynamicFields.injuryType || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, injuryType: e.target.value })
-              }
-            />
-            <Input
-              type="date"
-              placeholder="Incident Date"
-              value={dynamicFields.incidentDate || ""}
-              onChange={(e) =>
-                setDynamicFields({ ...dynamicFields, incidentDate: e.target.value })
-              }
-            />
+            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Personal Accident Details</h2>
+            <input type="text" placeholder="Injury Type" className="w-full p-2 border border-gray-300 rounded mb-2" />
+            <input type="date" placeholder="Incident Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
           </>
         );
       default:
@@ -197,109 +65,114 @@ const ClaimForm = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setResponse("");
+
+    if (aadhaar.length !== 12 || !consent) {
+      setResponse("Please enter a valid Aadhaar and provide consent.");
+      return;
+    }
+
+    const status = Math.random() > 0.3 ? "success" : "fail";
+    if (status === "success") {
+      window.location.href = "https://xangarsinfra.com/verify-success";
+    } else {
+      setResponse("❌ Authentication failed. Please try alternate verification.");
+    }
+  };
+
   return (
-    <div className="form-wrapper">
-      <div className="form-card">
-        <img src={logo} alt="Xangars Logo" style={{backgroundColor:"red"}} className="form-logo"></img>
-        <h2 className="form-title"><u>Insurance Claim Verification</u></h2>
+    <div className="bg-[#f0f4f8] min-h-screen py-8 px-4 font-mono">
+      <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+        <img src={logo} alt="Xangars Logo" className="bg-red-200 mx-auto mb-4 max-w-[150px]"></img>
+        <h2 className="text-center text-xl font-bold text-gray-700 mb-6">Insurance Claim Verification</h2>
+
         <form onSubmit={handleSubmit}>
-          <SectionTitle title="Insurer & Policy Details" />
+          <h3 className="font-semibold text-gray-800 mb-2">Insurer & Policy Details</h3>
 
-          <div className="form-group">
-            <label>Insurance Provider</label>
-            <select required>
-              <option value="">Select Insurer</option>
-              {[
-                "LIC", "HDFC ERGO", "ICICI Lombard", "New India Assurance",
-                "United India Insurance", "Reliance General", "Bajaj Allianz",
-                "Star Health", "Tata AIG", "Oriental Insurance",
-              ].map((ins) => (
-                <option key={ins}>{ins}</option>
-              ))}
-            </select>
-          </div>
+          <select className="w-full p-2 border border-gray-300 rounded mb-2" required>
+            <option value="">Select Insurer</option>
+            {[
+              "LIC", "HDFC ERGO", "ICICI Lombard", "New India Assurance",
+              "United India Insurance", "Reliance General", "Bajaj Allianz",
+              "Star Health", "Tata AIG", "Oriental Insurance"
+            ].map((insurer) => (
+              <option key={insurer}>{insurer}</option>
+            ))}
+          </select>
 
-          <Input label="Policy Number" required />
-
-          <div className="form-group">
-            <label>Claim Type</label>
-            <select value={claimType} onChange={handleClaimTypeChange} required>
-              <option value="">Select Type</option>
-              <option value="health">Health Insurance</option>
-              <option value="motor">Motor Insurance</option>
-              <option value="life">Life Insurance</option>
-              <option value="travel">Travel Insurance</option>
-              <option value="home">Home Insurance</option>
-              <option value="personal">Personal Accident</option>
-            </select>
-          </div>
-
-          {renderClaimFields()}
-
-          <SectionTitle title="Identity Verification" />
-          <Input
-            label="Aadhaar Number"
-            value={aadhaar}
-            onChange={(e) => setAadhaar(e.target.value)}
-            maxLength={12}
-            placeholder="Enter 12-digit Aadhaar"
+          <input
+            type="text"
+            placeholder="Policy Number"
+            className="w-full p-2 border border-gray-300 rounded mb-2"
             required
           />
 
-          <div className="form-group">
-            <label>Authentication Type</label>
-            <select required>
-              <option value="otp">OTP</option>
-              <option value="biometric">Biometric</option>
-            </select>
+          <select
+            value={claimType}
+            onChange={(e) => setClaimType(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            required
+          >
+            <option value="">Select Type</option>
+            <option value="health">Health Insurance</option>
+            <option value="motor">Motor Insurance</option>
+            <option value="life">Life Insurance</option>
+            <option value="travel">Travel Insurance</option>
+            <option value="home">Home Insurance</option>
+            <option value="personal">Personal Accident</option>
+          </select>
+
+          {/* 🔑 KEY FIX HERE */}
+          <div key={claimType}>
+            {renderDynamicFields()}
           </div>
 
-          <div className="form-check">
+          <h3 className="font-semibold text-gray-800 mt-4 mb-2">Identity Verification</h3>
+
+          <input
+            type="text"
+            placeholder="Enter 12-digit Aadhaar"
+            maxLength={12}
+            value={aadhaar}
+            onChange={(e) => setAadhaar(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded mb-2"
+            required
+          />
+
+          <select className="w-full p-2 border border-gray-300 rounded mb-2" required>
+            <option value="otp">OTP</option>
+            <option value="biometric">Biometric</option>
+          </select>
+
+          <div className="flex items-center mb-4">
             <input
               type="checkbox"
-              id="consent"
               checked={consent}
               onChange={(e) => setConsent(e.target.checked)}
+              className="mr-2"
               required
             />
-            <label htmlFor="consent" style={{ color: "#34495e" }}>I consent to Aadhaar-based authentication.</label>
+            <label>I consent to Aadhaar-based authentication.</label>
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button
+            type="submit"
+            className="w-full bg-[#c0392b] hover:bg-[#a93226] text-white py-2 rounded font-semibold"
+          >
             Submit for Verification
           </button>
-
-          {response && <div className="form-response">{response}</div>}
         </form>
+
+        {response && (
+          <div className={`text-center mt-4 font-bold ${response.includes("failed") ? "text-red-600" : "text-blue-600"}`}>
+            {response}
+          </div>
+        )}
       </div>
     </div>
   );
 };
-
-const Input = ({
-  label,
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  maxLength,
-  required = false,
-}) => (
-  <div className="form-group">
-    {label && <label>{label}</label>}
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      maxLength={maxLength}
-      required={required}
-    />
-  </div>
-);
-
-const SectionTitle = ({ title }) => (
-  <h3 className="section-title">{title}</h3>
-);
 
 export default ClaimForm;
