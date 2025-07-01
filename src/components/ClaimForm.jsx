@@ -8,62 +8,117 @@ const ClaimForm = () => {
   const [response, setResponse] = useState("");
 
   const renderDynamicFields = () => {
-    switch (claimType) {
-      case "health":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Health Insurance Details</h2>
-            <input type="text" placeholder="Hospital Name" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Admission Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Discharge Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      case "motor":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Motor Insurance Details</h2>
-            <input type="text" placeholder="Vehicle Number" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Accident Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      case "life":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Life Insurance Details</h2>
-            <input type="text" placeholder="Nominee Name" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Date of Death" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="text" placeholder="Cause of Death" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      case "travel":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Travel Insurance Details</h2>
-            <input type="text" placeholder="Destination Country" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Travel Start Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="text" placeholder="Incident Description" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      case "home":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Home Insurance Details</h2>
-            <input type="text" placeholder="Property Address" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="text" placeholder="Type of Damage" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      case "personal":
-        return (
-          <>
-            <h2 className="font-semibold mt-4 mb-2 text-gray-800">Personal Accident Details</h2>
-            <input type="text" placeholder="Injury Type" className="w-full p-2 border border-gray-300 rounded mb-2" />
-            <input type="date" placeholder="Incident Date" className="w-full p-2 border border-gray-300 rounded mb-2" />
-          </>
-        );
-      default:
-        return null;
-    }
-  };
+  switch (claimType) {
+    case "health":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Health Insurance Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Hospital Name</label>
+          <input type="text" placeholder="Enter hospital name" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Admission Date</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Discharge Date</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+        </>
+      );
+
+    case "motor":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Motor Insurance Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Vehicle Number</label>
+          <input type="text" placeholder="Enter vehicle number" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Accident Date</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+        </>
+      );
+
+    case "life":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Life Insurance Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Nominee Name</label>
+          <input type="text" placeholder="Enter nominee name" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Date of Death</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Cause of Death</label>
+          <input type="text" placeholder="Enter cause of death" className="w-full p-2 border border-gray-300 rounded mb-2" />
+        </>
+      );
+
+    case "travel":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Travel Insurance Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Destination Country</label>
+          <input type="text" placeholder="Enter country name" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Travel Start Date</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Incident Description</label>
+          <input type="text" placeholder="Describe incident" className="w-full p-2 border border-gray-300 rounded mb-2" />
+        </>
+      );
+
+    case "home":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Home Insurance Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Property Address</label>
+          <input type="text" placeholder="Enter address" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Type of Damage</label>
+          <input type="text" placeholder="Describe damage" className="w-full p-2 border border-gray-300 rounded mb-2" />
+        </>
+      );
+
+    case "personal":
+      return (
+        <>
+          <h2 className="font-semibold mt-4 mb-2 text-gray-800">Personal Accident Details</h2>
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Injury Type</label>
+          <input type="text" placeholder="Enter injury type" className="w-full p-2 border border-gray-300 rounded mb-2" />
+
+          <label className="block text-sm font-medium text-gray-700 mb-1">Incident Date</label>
+          <div className="relative mb-2">
+            <input type="date" className="w-full p-2 border border-gray-300 rounded" />
+            {/* <span className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">📅</span> */}
+          </div>
+        </>
+      );
+
+    default:
+      return null;
+  }
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,13 +128,14 @@ const ClaimForm = () => {
       setResponse("Please enter a valid Aadhaar and provide consent.");
       return;
     }
+    setResponse("Authentication in progress...");
 
-    const status = Math.random() > 0.3 ? "success" : "fail";
-    if (status === "success") {
-      window.location.href = "https://xangarsinfra.com/verify-success";
-    } else {
-      setResponse("❌ Authentication failed. Please try alternate verification.");
-    }
+    // const status = Math.random() > 0.3 ? "success" : "fail";
+    // if (status === "success") {
+    //   window.location.href = "https://xangarsinfra.com/verify-success";
+    // } else {
+    //   setResponse("❌ Authentication failed. Please try alternate verification.");
+    // }
   };
 
   return (
